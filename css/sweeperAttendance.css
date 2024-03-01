@@ -1,0 +1,1845 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "open-sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary-1: #293541;
+  --color-secondary-1: #f9f9f9;
+  --color-accent-1: #dee2e6;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+h3 {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  margin-bottom: 0 !important;
+}
+
+section.attendance-section,
+section.wardwise-attendance-section,
+section.kothiwise-attendance-section,
+section.attendance-report-section {
+  width: 100%;
+  padding: 20px;
+}
+
+section.attendance-section .sweeper-attendance {
+  border: 2px solid var(--color-accent-1);
+}
+
+.sweeper-attendance .title {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.sweeper-attendance .title i {
+  color: #293541;
+  width: 20px;
+}
+
+.sweeper-attendance .body .checkbox-wrapper {
+  display: inline-flex;
+  font-size: 14px;
+  align-items: center;
+}
+
+.sweeper-attendance .body .checkbox-wrapper input {
+  margin: 0 2px 0 10px;
+}
+
+.sweeper-attendance .body .filters {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.filters .dropdown-wrapper h5 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.filters-section label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.filters .dropdown-wrapper h5 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.filters .dropdown-wrapper {
+  width: 100%;
+  /* display: block !important; */
+}
+
+.filters .dropdown-wrapper .dropdown {
+  border: 2px solid var(--color-accent-1);
+  padding: 5px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.filters .dropdown-wrapper .dropdown .dropdown-title {
+  font-size: 13px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filters .dropdown-wrapper .dropdown .dropdown-title i {
+  height: 100%;
+  color: var(--color-primary-1) !important;
+}
+
+.filters .dropdown-wrapper .dropdown .dropdown-title span {
+  margin-left: 5px;
+}
+
+.filters .dropdown-wrapper .dropdown .dropdown-body {
+  padding: 0 5px;
+}
+
+.filters .dropdown-wrapper .dropdown .dropdown-body input {
+  width: 100%;
+  height: 30px;
+  padding: 0 5px;
+  margin: 5px 0;
+}
+
+.filters .dropdown-wrapper .dropdown .dropdown-body input:focus {
+  outline: 2px solid #4d7496;
+  border: none;
+}
+
+.filters .dropdown-wrapper input:focus {
+  outline: 2px solid #4d7496;
+  border: none;
+}
+
+.filters .dropdown-wrapper .dropdown .dropdown-body li {
+  padding: 5px;
+  font-size: 13px;
+}
+
+.filters .dropdown-wrapper .dropdown .dropdown-body li:hover {
+  background: #4d7496;
+  color: #fff;
+}
+
+.dropdown-content {
+  display: none;
+}
+
+.dropdown-content.active {
+  display: block;
+}
+
+.dropdown-btn .toggler.active {
+  transform: rotate(180deg);
+}
+
+.toggler.active {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f9f9f9;
+  width: 100%;
+  border: 2px solid #ddd;
+  z-index: 1; /* set the z-index property to a higher value than the parent container */
+}
+
+.filters .date-wrapper h5 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.filters .date-wrapper input[type="date"] {
+  width: 100%;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  padding: 0 5px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  color: #555;
+}
+
+.date-wrapper input[type="date"] {
+  width: 100%;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  padding: 0 5px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  color: #555;
+}
+
+.filters .date-wrapper input[type="datetime-local"] {
+  width: 100%;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  padding: 0 5px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  color: #555;
+}
+
+.date-wrapper input[type="datetime-local"],
+.date-wrapper input[type="time"] {
+  width: 100%;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  padding: 0 5px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  color: #555;
+}
+
+.filters .search-button {
+  align-self: baseline;
+  justify-self: flex-start;
+  padding: 5px 12px;
+  margin-top: 25px;
+  color: #fff;
+  border: none;
+  font-size: 13px;
+}
+
+.btn {
+  font-size: 14px !important;
+  white-space: nowrap;
+}
+
+.btn-blue {
+  background-color: #3968c6 !important;
+  color: #fff !important;
+}
+
+.btn-purple {
+  background-color: #5453a1 !important;
+  color: #fff !important;
+}
+
+.btn-darkgreen {
+  background-color: #3a6121 !important;
+  color: #fff !important;
+}
+
+.btn-darkyellow {
+  background-color: #f39c12 !important;
+  color: #fff !important;
+}
+
+.dropdown .dropdown-body ul {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+@media (width <= 425px) {
+  .sweeper-attendance .body .filters {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Ward Wise Attendance Section*/
+
+section.wardwise-attendance-section .wardwise-attendance {
+  border: 2px solid var(--color-accent-1);
+}
+
+.wardwise-attendance .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 2px solid var(--color-accent-1);
+}
+
+.wardwise-attendance .body {
+  padding: 10px;
+  overflow-x: auto;
+}
+
+.wardwise-attendance .body.collapsible {
+  display: none;
+}
+
+.wardwise-attendance .body.collapsible.active {
+  display: block;
+  padding: 10px;
+}
+
+.wardwise-attendance .body table {
+  width: 100%;
+  text-align: center;
+}
+
+.wardwise-attendance .body table,
+.wardwise-attendance .body th,
+.wardwise-attendance .body td {
+  border: 2px solid var(--color-accent-1);
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+.wardwise-attendance .body table th {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.wardwise-attendance .body table td {
+  font-size: 13px;
+}
+
+.wardwise-attendance .body table tr td input {
+  width: fit-content;
+}
+
+/* Khotiwise Attendance */
+
+section.kothiwise-attendance-section .kothiwise-attendance {
+  border: 2px solid var(--color-accent-1);
+}
+
+.kothiwise-attendance .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 2px solid var(--color-accent-1);
+}
+
+.kothiwise-attendance .body {
+  padding: 10px;
+  overflow-x: auto;
+}
+
+.record-filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.record-filters .perpage-filter {
+  width: 80px;
+  padding: 5px;
+}
+
+.record-filters .perpage-filter:focus {
+  border: 2px solid #3968c6;
+  box-shadow: 0 0 3px grey;
+  outline: none;
+}
+
+.kothiwise-attendance .body .filters .perpage-filter option {
+}
+
+.record-filters .search-box {
+  border: 2px solid var(--color-accent-1);
+  display: flex;
+  align-items: center;
+}
+
+.record-filters .search-box i {
+  border-right: 2px solid var(--color-accent-1);
+  width: 30px;
+  text-align: center;
+  height: 100%;
+  line-height: 20px;
+}
+
+.record-filters .search-box i::before {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.record-filters .search-box input {
+  border: none;
+  outline: none;
+  padding: 0 5px;
+  flex-grow: 1;
+}
+
+.kothiwise-attendance .body table {
+  width: 100%;
+  text-align: center;
+}
+
+.kothiwise-attendance .body table,
+.kothiwise-attendance .body th,
+.kothiwise-attendance .body td {
+  border: 2px solid var(--color-accent-1);
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+.kothiwise-attendance .body {
+  overflow-x: auto;
+}
+
+.kothiwise-attendance .body.collapsible.active {
+  display: block;
+}
+
+.kothiwise-attendance .body.collapsible {
+  display: none;
+}
+
+.kothiwise-attendance .body table th {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.kothiwise-attendance .body table td {
+  font-size: 13px;
+}
+
+.kothiwise-attendance .body table tr td input {
+  width: fit-content;
+}
+
+/* Pagination */
+
+.pagination-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pagination-row p {
+  font-size: 13px;
+}
+
+.pagination-row .pagination {
+  height: fit-content;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.pagination-row .pagination a {
+  border: 2px solid #ccc;
+  padding: 5px 10px;
+  color: var(--color-primary-1);
+}
+
+.pagination-row .pagination a.previous i {
+  margin-right: 10px;
+}
+
+.pagination-row .pagination a.next i {
+  margin-left: 10px;
+}
+
+/* Attendance Report */
+
+.attendance-report-section .attendance-report {
+  border: 2px solid var(--color-accent-1);
+}
+
+.attendance-report .title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 2px solid var(--color-accent-1);
+}
+
+@media (width <= 425px) {
+  .attendance-report .title {
+    flex-direction: column;
+  }
+}
+
+.attendance-report .title .controls {
+  display: flex;
+  align-items: center;
+}
+
+.attendance-report .title .controls div:first-child {
+  display: flex;
+  align-items: center;
+}
+
+@media (width <= 768px) {
+  .attendance-report .title .controls {
+    display: block;
+  }
+}
+
+.attendance-report .title .controls h2 {
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+.attendance-report .title .controls h3 {
+  margin: 0 5px;
+}
+
+.attendance-report .title .controls button {
+  border: none;
+  font-size: 13px;
+  padding: 5px 15px;
+  color: #fff;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+@media (width <= 425px) {
+  .controls {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .controls div:first-child {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .controls div:last-child {
+    margin-bottom: 10px;
+  }
+}
+
+.attendance-report .title .controls button.total {
+  background-color: #5453a1;
+}
+
+.attendance-report .title .controls button.present {
+  background-color: #3a6121;
+}
+
+.attendance-report .title .controls button.absent {
+  background-color: #f39c12;
+}
+
+@media (width <=425px) {
+  .attendance-report .title .downloads i {
+    float: right;
+  }
+}
+
+.attendance-report .title .downloads img {
+  width: 30px;
+  height: 30px;
+}
+
+.attendance-report-section .attendance-report .body {
+  padding: 10px;
+}
+
+.attendance-report .body table {
+  width: 100%;
+  text-align: center;
+}
+
+.attendance-report .body table,
+.attendance-report .body th,
+.attendance-report .body td {
+  border: 2px solid var(--color-accent-1);
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+.attendance-report .body {
+  overflow-x: auto;
+}
+
+.attendance-report .body.collapsible.active {
+  display: block;
+}
+
+.attendance-report .body.collapsible {
+  display: none;
+}
+
+.attendance-report .body table th {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.attendance-report .body table td {
+  font-size: 13px;
+}
+
+.attendance-report .body table tr td input {
+  width: fit-content;
+}
+
+/* CSS for Data Table */
+
+.dataTables_length select[name] {
+  width: 80px;
+}
+
+select[name]:focus {
+  border: 1px solid #3968c6;
+  outline: none;
+  box-shadow: 0 0 5px grey;
+}
+
+.dataTables_length label,
+.dataTables_info,
+.dataTables_paginate.paging_simple_numbers {
+  font-size: 13px;
+}
+
+.dataTables_paginate.paging_simple_numbers,
+.dataTables_info {
+  margin-top: 10px !important;
+}
+
+#kothiWise_filter label,
+#attendanceReport_filter label {
+  border: 2px solid var(--color-accent-1);
+  display: flex;
+  align-items: center;
+}
+
+#kothiWise_filter label img,
+#attendanceReport_filter label img {
+  height: 100%;
+  border-right: 2px solid var(--color-accent-1);
+  padding: 0 5px;
+}
+
+#kothiWise_filter label input,
+#attendanceReport_filter label input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 13px;
+  padding: 5px;
+}
+
+/* .dataTables_wrapper .dataTables_paginate .paginate_button {
+color: #3968c6 !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+background: #dcdcdc !important;
+} */
+
+/* Sweeper Route Coverage Report */
+
+.filters-section {
+  width: 100%;
+  padding: 20px;
+}
+
+.filters-section .filters-container {
+  border: 2px solid var(--color-accent-1);
+}
+
+.filters-section .filters-container .title i {
+  color: #293541;
+  width: 20px;
+}
+
+.filters-section .filters-container .title {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.filters-section .filters-container .body .filters {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
+.filters-section .filters-container .body .filters.col-seven {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.filters-section .filters-container .body .filters.col-five {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.filters-section .filters-container .body .filters.col-four {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.filters-container .body .checkbox-wrapper {
+  display: inline-flex;
+  font-size: 14px;
+  align-items: center;
+}
+
+.filters-container .body .checkbox-wrapper input {
+  margin: 0 2px 0 10px;
+}
+
+.filters-container .body .checkbox-wrapper label {
+  margin-bottom: 0;
+}
+
+@media (width <= 425px) {
+  .filters-section .filters-container .body .filters,
+  .filters-section .filters-container .body .filters.col-seven,
+  .filters-section .filters-container .body .filters.col-five,
+  .filters-section .filters-container .body .filters.col-four {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+#sweeperCoverageReport_filter label {
+  border: 2px solid var(--color-accent-1);
+  display: flex;
+  align-items: center;
+}
+
+#sweeperCoverageReport_filter label img {
+  height: 100%;
+  padding: 0 5px;
+  padding-right: 0;
+}
+
+#sweeperCoverageReport label input,
+#sweeperCoverageReport_filter label input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 13px;
+  padding: 5px;
+  border-left: 2px solid var(--color-accent-1);
+}
+
+.sweeper-coverage-report .body table {
+  width: 100%;
+  text-align: center;
+}
+
+.sweeper-coverage-report .body table,
+.sweeper-coverage-report .body th,
+.sweeper-coverage-report .body td {
+  border: 2px solid var(--color-accent-1);
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+.sweeper-coverage-report .body {
+  overflow-x: auto;
+}
+
+.sweeper-coverage-report .body.collapsible.active {
+  display: block;
+}
+
+.sweeper-coverage-report .body.collapsible {
+  display: none;
+}
+
+.sweeper-coverage-report .body table th {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sweeper-coverage-report .body table td {
+  font-size: 13px;
+}
+
+.sweeper-coverage-report .body table tr td input {
+  width: fit-content;
+}
+
+section.sweeper-coverage-report-section {
+  width: 100%;
+  padding: 20px;
+}
+
+.sweeper-coverage-report-section .sweeper-coverage-report {
+  border: 2px solid var(--color-accent-1);
+}
+
+.sweeper-coverage-report-section .sweeper-coverage-report .title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 2px solid var(--color-accent-1);
+}
+
+.sweeper-coverage-report .title .controls {
+  display: flex;
+  align-items: center;
+}
+
+.sweeper-coverage-report .title .controls div:first-child {
+  display: flex;
+  align-items: center;
+}
+
+.sweeper-coverage-report .title .controls h2 {
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+.sweeper-coverage-report .title .controls h3 {
+  margin: 0 5px;
+}
+
+.sweeper-coverage-report .title .controls p {
+  margin: 0;
+  font-style: italic;
+  font-size: 13px;
+  color: red;
+  font-weight: 500;
+}
+
+.sweeper-coverage-report .title .downloads img {
+  width: 30px;
+  height: 30px;
+}
+
+.sweeper-coverage-report .body.collapsible.active {
+  display: block;
+}
+
+.sweeper-coverage-report .body.collapsible {
+  display: none;
+}
+
+.sweeper-coverage-report-section .sweeper-coverage-report .body {
+  padding: 10px;
+}
+
+#sweeperCoverageReport_filter label {
+  width: 250px;
+}
+
+@media (width <= 768px) {
+  .sweeper-coverage-report .title .controls {
+    display: block;
+  }
+}
+
+@media (width <= 425px) {
+  .sweeper-coverage-report .title {
+    flex-direction: column;
+  }
+
+  .sweeper-coverage-report .title .downloads i {
+    float: right;
+  }
+
+  #sweeperCoverageReport_filter label {
+    width: 100%;
+  }
+}
+
+/* Attendance Report Summary */
+
+#attendanceReportSummary_filter label {
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  width: 250px;
+}
+
+#attendanceReportSummary_filter label img {
+  height: 100%;
+  padding: 0 5px;
+  padding-right: 0;
+}
+
+#attendanceReportSummary_filter label input {
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-image: initial;
+  outline: none;
+  flex-grow: 1;
+  font-size: 13px;
+  padding: 5px;
+  border-left: 1px solid #ccc;
+}
+
+@media (width <= 425px) {
+  #attendanceReportSummary_filter label {
+    width: 100%;
+  }
+}
+
+#sweeperCoverageReport_filter label {
+  border: 2px solid var(--color-accent-1);
+  display: flex;
+  align-items: center;
+}
+
+#sweeperCoverageReport_filter label img {
+  height: 100%;
+  padding: 0 5px;
+  padding-right: 0;
+}
+
+#sweeperCoverageReport label input,
+#sweeperCoverageReport_filter label input {
+  border: none;
+  outline: none;
+  flex-grow: 1;
+  font-size: 13px;
+  padding: 5px;
+  border-left: 2px solid var(--color-accent-1);
+}
+
+.sweeper-coverage-report .body table {
+  width: 100%;
+  text-align: center;
+}
+
+.sweeper-coverage-report .body table,
+.sweeper-coverage-report .body th,
+.sweeper-coverage-report .body td {
+  border: 2px solid var(--color-accent-1);
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+.sweeper-coverage-report .body {
+  overflow-x: auto;
+}
+
+.sweeper-coverage-report .body.collapsible.active {
+  display: block;
+}
+
+.sweeper-coverage-report .body.collapsible {
+  display: none;
+}
+
+.sweeper-coverage-report .body table th {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sweeper-coverage-report .body table td {
+  font-size: 13px;
+}
+
+.sweeper-coverage-report .body table tr td input {
+  width: fit-content;
+}
+
+section.sweeper-coverage-report-section {
+  width: 100%;
+  padding: 20px;
+}
+
+.sweeper-coverage-report-section .sweeper-coverage-report {
+  border: 2px solid var(--color-accent-1);
+}
+
+.sweeper-coverage-report-section .sweeper-coverage-report .title {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 2px solid var(--color-accent-1);
+}
+
+.sweeper-coverage-report .title .controls {
+  display: flex;
+  align-items: center;
+}
+
+.sweeper-coverage-report .title .controls div:first-child {
+  display: flex;
+  align-items: center;
+}
+
+.sweeper-coverage-report .title .controls h2 {
+  font-size: 18px;
+  margin: 0 5px;
+}
+
+.sweeper-coverage-report .title .controls h3 {
+  margin: 0 5px;
+}
+
+.attendance-report .title .controls p,
+.sweeper-coverage-report .title .controls p {
+  margin: 0;
+  font-style: italic;
+  font-size: 13px;
+  color: red;
+  font-weight: 500;
+}
+
+.sweeper-coverage-report .title .downloads img {
+  width: 30px;
+  height: 30px;
+}
+
+.sweeper-coverage-report .body.collapsible.active {
+  display: block;
+}
+
+.sweeper-coverage-report .body.collapsible {
+  display: none;
+}
+
+.sweeper-coverage-report-section .sweeper-coverage-report .body {
+  padding: 10px;
+}
+
+#sweeperCoverageReport_filter label {
+  width: 250px;
+}
+
+@media (width <= 768px) {
+  .sweeper-coverage-report .title .controls {
+    display: block;
+  }
+}
+
+@media (width <= 425px) {
+  .sweeper-coverage-report .title {
+    flex-direction: column;
+  }
+
+  .sweeper-coverage-report .title .downloads i {
+    float: right;
+  }
+
+  #sweeperCoverageReport_filter label {
+    width: 100%;
+  }
+}
+
+/* FSTDROPDOWN CSS */
+
+.fstlist div {
+  font-size: 14px !important;
+}
+
+/* .fstlist > div.selected {
+background-color: #4d7496 !important;
+color: #fff !important;
+}
+
+.fstlist > div:hover {
+background-color: #4d7496 !important;
+} */
+
+/* Sweeper Dashboard */
+
+.btn-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn-wrapper button {
+  font-size: 14px !important;
+  margin-left: 10px;
+}
+
+.btn i {
+  margin: 0 5px;
+}
+
+.filters + .filters-button {
+  padding: 20px;
+  padding-top: 0;
+}
+
+.filters + .filters-button .download-excel {
+  float: right;
+}
+
+.filters + .filters-button .download-excel img {
+  width: 35px;
+  height: 35px;
+}
+
+td input[type="image"] {
+  width: 50px;
+  height: 50px;
+}
+
+/* Sweeper History Map */
+
+@media (width <=768px) {
+  .filters-section .filters-container .body .filters.history-map-controls {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .filters.history-map-controls .btn-wrapper {
+    grid-column: 1 / 4;
+  }
+}
+
+.filters.history-map-controls .btn-wrapper input[type="button"] {
+  margin-left: 5px;
+}
+
+.filters.history-map-controls .speed {
+  white-space: nowrap;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.filters.history-map-controls span {
+  font-size: 14px;
+  margin: 0 5px;
+  margin-bottom: 5px;
+}
+
+span.required {
+  color: red;
+  margin: 0 !important;
+}
+
+section .map-wrapper {
+  width: 100%;
+  border: 2px solid #ccc;
+  height: calc(100vh - 300px);
+}
+
+/* Litter Bin Map */
+
+.map-filters .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--color-accent-1);
+}
+
+.map-filters .title h3 {
+  margin-top: 0 !important;
+  font-weight: 600 !important;
+}
+
+.map-filters .title i {
+  float: right;
+}
+
+.map-filters .title i::before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-filters .body.collapsible {
+  display: none;
+}
+
+.map-filters .body.collapsible.active {
+  display: block;
+}
+
+.litter-bin.map-container {
+  width: 100%;
+  height: calc(100vh - 240px);
+}
+
+.litter-bin.map-container .folium-map {
+  border: 2px solid var(--color-accent-1);
+}
+
+.map-filters form .btn-wrapper {
+  margin-left: 10px;
+}
+
+.body .filters button i {
+  margin-right: 5px;
+}
+
+/* ADD ROUTE PAGE */
+
+.filters-section.add-route-filters label {
+  font-size: 13px;
+}
+
+.filters-section.add-route-filters .title {
+  border-bottom: 2px solid var(--color-accent-1);
+  justify-content: space-between;
+}
+
+.add-route-filters .body.collapsible {
+  display: none;
+}
+
+.add-route-filters .body.collapsible.active {
+  display: block;
+  padding: 10px;
+}
+
+.add-route-filters .btn-wrapper input[type="button"] {
+  margin: 0 10px;
+}
+
+.filters.all-route-controls .create-route-control {
+  display: flex;
+  white-space: nowrap;
+}
+
+.filters.all-route-controls .create-route-control .route-inputs {
+  margin: 0 20px;
+}
+
+.create-route-control .route-inputs input[type="text"] {
+  margin-right: 10px;
+  padding: 4px 5px;
+  outline: none;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.create-route-control .route-inputs input[type="text"]:focus {
+  border: 1px solid #3968c6;
+}
+
+.filters.all-route-controls .route-controls h5 {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.filters.all-route-controls .route-controls + div input {
+  margin-top: 20px;
+}
+
+.dropdown-wrapper.view-route.active {
+  display: block !important;
+}
+
+.dropdown-wrapper.view-route {
+  display: none !important;
+}
+
+.btn-wrapper.view-route.active {
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn-wrapper.view-route {
+  display: none;
+}
+
+.btn-wrapper.view-create.active {
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn-wrapper.view-create {
+  display: none;
+}
+
+.dropdown-wrapper.create-route.active {
+  display: block;
+}
+
+.dropdown-wrapper.create-route {
+  display: none;
+}
+
+.date-wrapper.create-route.active {
+  display: block;
+}
+
+.date-wrapper.create-route {
+  display: none;
+}
+
+.filters.all-route-controls .create-route-control.active {
+  display: flex;
+}
+
+.filters.all-route-controls .create-route-control {
+  display: none;
+}
+
+.points-route {
+  display: none;
+}
+
+.points-route.active {
+  display: block;
+}
+
+.date-wrapper.points-route input[type="text"],
+.date-wrapper.kml-route input[type="text"] {
+  padding: 4px 5px;
+  outline: none;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.date-wrapper.points-route input[type="text"]:focus,
+.date-wrapper.kml-route input[type="text"]:focus {
+  border: 1px solid #3968c6;
+}
+
+.kml-route {
+  display: none;
+}
+
+.kml-route.active {
+  display: block;
+}
+
+/* Fleet Management Page */
+
+.filters-section .filters-container .body .filters.fleet-management {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.filters-section .filters-container .body .filters.fleet-management form {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.filters-section.fleet-management-section .sub-title-row {
+  border-top: 2px solid var(--color-accent-1);
+  border-bottom: 2px solid var(--color-accent-1);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.filters-section.fleet-management-section .sub-title-row h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.filters-section.fleet-management-section .sub-title-row div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filters-section.fleet-management-section .sub-title-row .live-tracking {
+  padding: 10px;
+  border-right: 2px solid var(--color-accent-1);
+  cursor: pointer;
+}
+
+.filters-section.fleet-management-section .sub-title-row .history-map {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.filters-section.fleet-management-section .sub-title-row .live-tracking i {
+  margin-right: 10px;
+}
+
+.filters-section.fleet-management-section .live-tracking-controls {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  padding: 20px 10px;
+}
+
+.filters-section.fleet-management-section .history-map-controls {
+  padding: 20px 10px;
+}
+
+.filters-section.fleet-management-section .history-map-controls .control {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.filters-section.fleet-management-section
+  .history-map-controls
+  .control:last-child {
+  margin-top: 10px;
+}
+
+.live-tracking-controls.live-tracking-body {
+  display: none !important;
+}
+
+.live-tracking-controls.live-tracking-body.active {
+  display: grid !important;
+}
+
+.history-map-controls.history-map-body {
+  display: none !important;
+}
+
+.history-map-controls.history-map-body.active {
+  display: grid !important;
+}
+
+.filters-section.fleet-management-section .date-wrapper label {
+  margin: 10px 0 5px 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.live-tracking-controls.live-tracking-body.active.status-area .information {
+  margin-left: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+@media (width <= 1024px) {
+  .filters-section .filters-container .body .filters.fleet-management form {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (width <= 768px) {
+  .filters-section .filters-container .body .filters.fleet-management form {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.live-tracking-controls.live-tracking-body.active.status-area {
+  display: block !important;
+}
+
+#feeder + span {
+  position: absolute;
+  top: 100%;
+  left: 10%;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.p-20 {
+  padding: 0 20px 20px 20px;
+}
+
+/* Geofence Page */
+
+#shapeForm input[type="text"] {
+  margin-right: 10px;
+  padding: 4px 5px;
+  outline: none;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+#shapeForm input[type="text"]:focus {
+  border: 1px solid #3968c6;
+}
+
+@media (width <= 1024px) {
+  .filters-section .filters-container .body #shapeForm.filters {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (width <= 768px) {
+  .filters-section .filters-container .body #shapeForm.filters {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width <= 425px) {
+  .filters-section .filters-container .body #shapeForm.filters {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+/* Feeders Coverage Report */
+
+.downloads input[type="image"] {
+  width: 30px;
+  height: 30px;
+}
+
+.dataTables_wrapper label {
+  border: 1px solid #ccc;
+  /*display: flex;
+  align-items: center;
+  width: 250px;*/
+}
+
+.dataTables_wrapper label input[type="search"] {
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-image: initial;
+  outline: none;
+  flex-grow: 1;
+  font-size: 13px;
+  padding: 5px;
+  border-left: 1px solid #ccc;
+  width: 230px;
+}
+
+.dataTables_wrapper label img {
+  /*height: 100%;*/
+  padding: 0 5px;
+  padding-right: 0;
+}
+
+.dataTables_length label {
+  border: none;
+}
+
+/*.modal-content {
+  width: 150%;
+}*/
+
+/* Yashwant's side */
+.downloads input[type="image"] {
+  width: 30px;
+  height: 30px;
+}
+
+.dataTables_wrapper label {
+  border: 1px solid #ccc;
+  /*display: flex;
+  align-items: center;
+  width: 250px;*/
+}
+
+.dataTables_wrapper label input[type="search"] {
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-image: initial;
+  outline: none;
+  flex-grow: 1;
+  font-size: 13px;
+  padding: 5px;
+  border-left: 1px solid #ccc;
+  width: 230px;
+}
+
+.dataTables_wrapper label img {
+  /*height: 100%;*/
+  padding: 0 5px;
+  padding-right: 0;
+}
+
+.dataTables_length label {
+  border: none;
+}
+
+.filters-section.byProduct input::placeholder {
+  font-size: 14px !important;
+  margin: 0;
+}
+
+.filters-section.byProduct input {
+  font-size: 14px !important;
+  height: 34px;
+}
+
+.filters-section.adhocForm input[type="text"]::placeholder {
+  font-size: 14px !important;
+  margin: 0;
+}
+
+.filters-section.adhocForm input[type="text"] {
+  font-size: 14px !important;
+  height: 34px;
+}
+
+.adhoc-textarea {
+  font-size: 14px !important;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+select {
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background: white;
+  overflow: hidden;
+  width: 100%;
+}
+
+table.dataTable thead th {
+  text-align: center;
+}
+
+table {
+  background: #fff;
+}
+
+.main_nav a,
+.main_sidebar a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.main_nav #sidebar_btn {
+  outline: none;
+  border: none;
+}
+
+/* Login Page */
+.login_page {
+  background: url(../Images/login_background.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.login_page h1 {
+  color: #01503a;
+}
+
+.login_page h2 {
+  color: #01503a;
+}
+
+.login_page .title_banner {
+  background: #facc0c;
+  border-radius: 6px;
+  width: 80%;
+}
+
+.login_page .swm_icons {
+  min-width: 50px;
+  max-width: 80px;
+  width: 100%;
+  height: 100%;
+}
+
+@media (width > 768px) {
+  .form-col {
+    max-width: 50%;
+  }
+}
+
+.login_page input[type="text"],
+.login_page input[type="password"] {
+  border: none;
+  outline: none;
+}
+
+.login_page input[type="text"]:focus,
+.login_page input[type="password"]:focus {
+  box-shadow: none;
+}
+
+.border-green {
+  border: 1px solid #01503a;
+}
+
+.border-green i,
+.login_page label,
+.login_page p {
+  color: #01503a;
+}
+
+.login_page a {
+  color: #01503a;
+  text-decoration: underline;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.login_page p,
+.login_page label {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.login_page h2 {
+  font-size: 30px;
+  line-height: 45px;
+  font-weight: 600;
+}
+
+.login_page h1 {
+  font-size: 50px;
+  font-weight: 600;
+}
+
+.login_page button[type="submit"] {
+  background-color: #01503a;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  outline: none;
+  border: none;
+}
+
+.login_page p a {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+@media (width <= 768px) {
+  .login_page h1 {
+    font-size: 30px;
+  }
+
+  .login_page h2 {
+    font-size: 20px;
+    line-height: normal;
+  }
+}
+
+.login__companylogo1 img {
+  width: 60px;
+  height: 60px;
+}
+
+.login__companylogo2 img {
+  width: 80px;
+  height: 60px;
+}
+
+.login__companylogo3 img {
+  width: 100px;
+  height: 50px;
+}
+
+/* Spinner Animation */
+
+.sk-chase {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  animation: sk-chase 2.5s infinite linear both;
+}
+
+.sk-chase-dot {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: sk-chase-dot 2s infinite ease-in-out both;
+}
+
+.sk-chase-dot:before {
+  content: "";
+  display: block;
+  width: 25%;
+  height: 25%;
+  background-color: #fff;
+  border-radius: 100%;
+  animation: sk-chase-dot-before 2s infinite ease-in-out both;
+}
+
+.sk-chase-dot:nth-child(1) {
+  animation-delay: -1.1s;
+}
+
+.sk-chase-dot:nth-child(2) {
+  animation-delay: -1s;
+}
+
+.sk-chase-dot:nth-child(3) {
+  animation-delay: -0.9s;
+}
+
+.sk-chase-dot:nth-child(4) {
+  animation-delay: -0.8s;
+}
+
+.sk-chase-dot:nth-child(5) {
+  animation-delay: -0.7s;
+}
+
+.sk-chase-dot:nth-child(6) {
+  animation-delay: -0.6s;
+}
+
+.sk-chase-dot:nth-child(1):before {
+  animation-delay: -1.1s;
+}
+
+.sk-chase-dot:nth-child(2):before {
+  animation-delay: -1s;
+}
+
+.sk-chase-dot:nth-child(3):before {
+  animation-delay: -0.9s;
+}
+
+.sk-chase-dot:nth-child(4):before {
+  animation-delay: -0.8s;
+}
+
+.sk-chase-dot:nth-child(5):before {
+  animation-delay: -0.7s;
+}
+
+.sk-chase-dot:nth-child(6):before {
+  animation-delay: -0.6s;
+}
+
+@keyframes sk-chase {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sk-chase-dot {
+  80%,
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sk-chase-dot-before {
+  50% {
+    transform: scale(0.4);
+  }
+
+  100%,
+  0% {
+    transform: scale(1);
+  }
+}
+
+.spinner_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  display: none;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.spinner_container.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spinner Css End */
