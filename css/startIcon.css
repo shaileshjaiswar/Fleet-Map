@@ -1,40 +1,57 @@
 .arrow-marker {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    color: red;
-  }
-  
-  .start-icon {
-    background-image: url('../Images/greenflag.png'); 
-    background-size: cover;
-    width: 36px !important; 
-    height: 36px !important;
-    margin-left: -9px !important;
-    margin-top: -39px !important;
-  }
-  
-  .custom-start-marker {
-    background-color: #ff0000; /* Replace with the desired background color for the start marker */
-    border-radius: 50%;
-    width: 120px; /* Adjust the width and height to match the size of your start marker */
-    height: 120px;
-    border: 2px solid #fff; /* Customize the border style */
-  }
-  
-  .start-icon::after {
-    content: "start";
-    position: absolute;
-    top: -30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 16px;
-    color: #2fb585;
-    opacity: 0; /* Hide the text initially */
-    transition: opacity 0.3s ease; /* Add a smooth transition effect */
-  }
-  
-  .start-icon:hover::after {
-    opacity: 1; /* Show the text on hover */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: red;
+}
+
+.start-icon {
+  background-image: url("../Images/greenflag.png");
+  background-size: cover;
+  width: 36px !important;
+  height: 36px !important;
+  margin-left: -9px !important;
+  margin-top: -39px !important;
+}
+
+.custom-start-marker {
+  background-color: #ff0000; /* Replace with the desired background color for the start marker */
+  border-radius: 50%;
+  width: 120px; /* Adjust the width and height to match the size of your start marker */
+  height: 120px;
+  border: 2px solid #fff; /* Customize the border style */
+}
+
+.start-icon::after {
+  content: "start";
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: #2fb585;
+  opacity: 0; /* Hide the text initially */
+  transition: opacity 0.3s ease; /* Add a smooth transition effect */
+}
+
+.start-icon:hover::after {
+  opacity: 1; /* Show the text on hover */
+}
+
+.custom-start-marker1 {
+  background-color: green; /* Replace with the desired background color for the start marker */
+  border-radius: 50%;
+  width: 120px; /* Adjust the width and height to match the size of your start marker */
+  height: 120px;
+  border: 2px solid #fff; /* Customize the border style */
+}
+
+.custom-end-marker1 {
+  background-color: #ff0000; /* Replace with the desired background color for the start marker */
+  border-radius: 50%;
+  width: 120px; /* Adjust the width and height to match the size of your start marker */
+  height: 120px;
+  border: 2px solid #fff; /* Customize the border style */
+}
+

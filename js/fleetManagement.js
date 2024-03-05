@@ -1,6 +1,6 @@
 const zoneDropdown = document.getElementById("zoneDropdown");
 const wardDropdown = document.getElementById("wardDropdown");
-const kothiDropdown = document.getElementById("kothiDropdown");
+// const kothiDropdown = document.getElementById("kothiDropdown");
 const vendorDropdown = document.getElementById("vendorDropdown");
 const liveVehicleDropdown = document.getElementById("liveVehicleDropdown");
 const historyVehicleDropdown = document.getElementById(
@@ -25,11 +25,11 @@ const btnClearMap = document.getElementById("btnClearMap");
 
 const zoneApi = "http://13.200.33.105/SWMServiceLive/SWMService.svc/GetZone";
 const wardApi = "http://13.200.33.105/SWMServiceLive/SWMService.svc/GetWard";
-const kothiApi = "http://13.200.33.105/SWMServiceLive/SWMService.svc/GetKothi";
+// const kothiApi = "http://13.200.33.105/SWMServiceLive/SWMService.svc/GetKothi";
 const commonApi =
   "http://13.200.33.105/SWMServiceLive/SWMService.svc/CommonMethod";
 
-const geoJsonFile = "../service/geofence.geojson";
+const geoJsonFile = "./service/geofence.geojson";
 var filteredLayer = null;
 var isPlaying = false;
 
@@ -169,6 +169,7 @@ const animateMarker = (prevLat, prevLon, newLat, newLon) => {
   // Call fetchMarkerPositions again after 5 seconds
   // setTimeout(trackData, 5000);
 };
+
 const setMapView = (lat, lon) => {
   map.setView([lat, lon], 15);
 };
@@ -220,39 +221,39 @@ const populateWardDropdown = async () => {
   }
 };
 
-const populateKothiDropdown = async () => {
-  try {
-    kothiDropdown.innerHTML = '<option value="0">Select Kothi</option>';
+// const populateKothiDropdown = async () => {
+//   try {
+//     kothiDropdown.innerHTML = '<option value="0">Select Kothi</option>';
 
-    const response = await axios.post(kothiApi, {
-      mode: 56,
-      Fk_accid: 11401,
-      Fk_ambcatId: 0,
-      Fk_divisionid: 0,
-      FK_VehicleID: 0,
-      Fk_ZoneId: zoneDropdown.value,
-      FK_WardId: wardDropdown.value,
-      Startdate: "",
-      Enddate: "",
-      Maxspeed: 0,
-      Minspeed: 0,
-      Fk_DistrictId: 0,
-      Geoid: 0,
-    });
+//     const response = await axios.post(kothiApi, {
+//       mode: 56,
+//       Fk_accid: 11401,
+//       Fk_ambcatId: 0,
+//       Fk_divisionid: 0,
+//       FK_VehicleID: 0,
+//       Fk_ZoneId: zoneDropdown.value,
+//       FK_WardId: wardDropdown.value,
+//       Startdate: "",
+//       Enddate: "",
+//       Maxspeed: 0,
+//       Minspeed: 0,
+//       Fk_DistrictId: 0,
+//       Geoid: 0,
+//     });
 
-    const kothiMasterList = response.data.GetKothiResult.KotiMasterList;
+//     const kothiMasterList = response.data.GetKothiResult.KotiMasterList;
 
-    for (const kothi of kothiMasterList) {
-      const option = document.createElement("option");
-      option.value = kothi.pk_kothiid;
-      option.text = kothi.kothiname;
-      kothiDropdown.appendChild(option);
-      kothiDropdown.fstdropdown.rebind();
-    }
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-};
+//     for (const kothi of kothiMasterList) {
+//       const option = document.createElement("option");
+//       option.value = kothi.pk_kothiid;
+//       option.text = kothi.kothiname;
+//       kothiDropdown.appendChild(option);
+//       kothiDropdown.fstdropdown.rebind();
+//     }
+//   } catch (error) {
+//     console.error("Error fetching data:", error);
+//   }
+// };
 
 const populateVendorDropdown = async () => {
   try {
@@ -329,7 +330,7 @@ const populateLiveVehicleDropdown = async () => {
 
 const populateGeofenceDropdown = async () => {
   try {
-    geofenceDropdown.innerHTML = '<option value="0">Select Vendor</option>';
+    geofenceDropdown.innerHTML = '<option value="0">Select Geofence</option>';
 
     const requestData = {
       storedProcedureName: "SP_GET_GEOFENCE_NAME",
@@ -370,8 +371,8 @@ const populateHistoryVehiDropdown = async () => {
         FK_VehicleID: 4,
         zoneId: zoneDropdown.value,
         WardId: wardDropdown.value,
-        sDate: startDate.value,
-        eDate: endDate.value,
+        // sDate: startDate.value,
+        // eDate: endDate.value,
       }),
     };
 
@@ -464,14 +465,14 @@ const handleZoneSelect = async (event) => {
 };
 
 const handleWardSelect = async (event) => {
-  await populateKothiDropdown();
+  // await populateKothiDropdown();
   await populateLiveVehicleDropdown();
   await populateHistoryVehiDropdown();
 };
 
-const handleKothiSelect = (event) => {
-  populateSweeperDropdown();
-};
+// const handleKothiSelect = (event) => {
+//   populateSweeperDropdown();
+// };
 
 const addGroupVehicles = (data) => {
   if (data.length > 0) {
@@ -1028,6 +1029,14 @@ const addLiveVehicle = (data) => {
 };
 
 const getGeofenceData = async () => {
+  if (geofenceDropdown.value === "0") {
+    Swal.fire({
+      icon: "info",
+      title: "Attention",
+      text: "Please select geofence name",
+    });
+    return;
+  }
   try {
     const { data } = await axios.get(geoJsonFile);
 
@@ -1096,34 +1105,163 @@ const getRouteId = async () => {
     if (data) {
       clearMarkers();
       Show_Route_Polyline(data[0].RouteId);
+      getFeeders(data[0].RouteId);
     }
   } catch (error) {
     console.error("Error fetching data:", error);
   }
 };
 
+const getFeeders = async (RouteId) => {
+  try {
+    const requestData = {
+      storedProcedureName: "proc_VehicleMapwithRoute_1 ",
+      parameters: JSON.stringify({
+        mode: 46,
+        RouteId,
+        FK_VehicleID: historyVehicleDropdown.value,
+        // Startdate: startDate.value,
+      }),
+    };
+
+    const response = await axios.post(commonApi, requestData);
+
+    if (!response.data.CommonMethodResult.CommonReportMasterList) {
+      toast.show();
+      return;
+    }
+
+    const commonReportMasterList =
+      response.data.CommonMethodResult.CommonReportMasterList[0].ReturnValue;
+
+    let data = JSON.parse(commonReportMasterList);
+    console.log("Feeder data", data);
+    showFeeders(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+const showFeeders = (data) => {
+  var markerfup;
+
+  for (var i = 0; i < data.length; i++) {
+    var lat = data[i].sLat;
+    var lon = data[i].sLong;
+    var Feeder = data[i].feedername;
+    var expectedTime = data[i].expectedtime;
+    var AttendTime = data[i].AttendTime;
+    var WaitTime = data[i].WaitTime;
+    var icon;
+    if (AttendTime.startsWith("N")) {
+      console.log("Status starts with 'N'");
+      iconUrl1 = REDFEEDER;
+    } else {
+      iconUrl1 = BLUEFEEDER;
+      console.log(iconUrl1);
+    }
+
+    const myfIcon = L.icon({
+      iconUrl: iconUrl1,
+      iconSize: [20, 20],
+      iconAnchor: [0.5, 0.5],
+      popupAnchor: [1, 1],
+      // You can also customize other icon properties like shadowUrl, shadowSize, etc.
+    });
+
+    markerfup = L.marker([lat, lon], { icon: myfIcon }).addTo(myfIconLayer);
+    markerfup.bindPopup(
+      "Feeder Name: " +
+        Feeder +
+        "<br>AttendTime: " +
+        AttendTime +
+        "<br>WaitTime: " +
+        WaitTime +
+        "<br>Expected Time: " +
+        expectedTime
+    );
+  }
+};
+
+// const showPolylineOnMap = (coordinates) => {
+//   markerGroup1.clearLayers();
+//   var decorator;
+//   var polyline = L.polyline(coordinates, {
+//     color: "red",
+//     opacity: 0.5,
+//   }).addTo(markerGroup1);
+//   polyline.addTo(markerGroup1);
+
+//   var bounds = polyline.getBounds();
+//   map.flyToBounds(bounds, { duration: 1, easeLinearity: 0.25 });
+//   decorator = L.polylineDecorator(polyline, {
+//     patterns: [
+//       {
+//         offset: 0,
+//         symbol: L.Symbol.marker({
+//           markerOptions: {
+//             icon: L.divIcon({ className: "start-route-icon" }),
+//             zIndexOffset: 1000,
+//           },
+//         }),
+//       },
+//       {
+//         offset: "10%",
+//         repeat: 50,
+//         symbol: L.Symbol.arrowHead({
+//           pixelSize: 5,
+//           polygon: true,
+//           pathOptions: { stroke: true, color: "#414181" },
+//         }),
+//       },
+//     ],
+//   }).addTo(markerGroup1);
+
+//   decorator.addTo(markerGroup1);
+
+//   coordinates.forEach(function (coords, index) {
+//     if (index === 0) {
+//       L.marker(coords, {
+//         icon: L.divIcon({ className: "custom-start-marker" }),
+//       }).addTo(markerGroup1);
+//     } else {
+//       L.marker(coords, {
+//         icon: L.divIcon({ className: "custom-marker" }),
+//       }).addTo(markerGroup1);
+//     }
+//   });
+// };
+
 const showPolylineOnMap = (coordinates) => {
   markerGroup1.clearLayers();
   var decorator;
+
+  // Create polyline
   var polyline = L.polyline(coordinates, {
     color: "red",
     opacity: 0.5,
   }).addTo(markerGroup1);
+
+  // Add polyline to markerGroup1
   polyline.addTo(markerGroup1);
 
+  // Get bounds and fly to them
   var bounds = polyline.getBounds();
   map.flyToBounds(bounds, { duration: 1, easeLinearity: 0.25 });
+
+  // Add start marker (green dot)
+  L.marker(coordinates[0], {
+    icon: L.divIcon({ className: "custom-start-marker1" }),
+  }).addTo(markerGroup1);
+
+  // Add end marker (red dot)
+  L.marker(coordinates[coordinates.length - 1], {
+    icon: L.divIcon({ className: "custom-end-marker1" }),
+  }).addTo(markerGroup1);
+
+  // Add polyline decorator with arrow heads
   decorator = L.polylineDecorator(polyline, {
     patterns: [
-      {
-        offset: 0,
-        symbol: L.Symbol.marker({
-          markerOptions: {
-            icon: L.divIcon({ className: "start-icon" }),
-            zIndexOffset: 1000,
-          },
-        }),
-      },
       {
         offset: "10%",
         repeat: 50,
@@ -1136,18 +1274,14 @@ const showPolylineOnMap = (coordinates) => {
     ],
   }).addTo(markerGroup1);
 
+  // Add polyline decorator to markerGroup1
   decorator.addTo(markerGroup1);
 
-  coordinates.forEach(function (coords, index) {
-    if (index === 0) {
-      L.marker(coords, {
-        icon: L.divIcon({ className: "custom-start-marker" }),
-      }).addTo(markerGroup1);
-    } else {
-      L.marker(coords, {
-        icon: L.divIcon({ className: "custom-marker" }),
-      }).addTo(markerGroup1);
-    }
+  // Add custom markers for each coordinate
+  coordinates.slice(1, -1).forEach(function (coords) {
+    L.marker(coords, {
+      icon: L.divIcon({ className: "custom-marker" }),
+    }).addTo(markerGroup1);
   });
 };
 
@@ -1234,19 +1368,21 @@ const addMarkersWithDelay = (data) => {
   for (var i = 0; i < data.length; i++) {
     var lat = data[i].latitude;
     var lon = data[i].longitude;
-    var time = data[i].packetdatetime;
+    var time = `Date: ${data[i].datetim.split("T")[0]} <br> Time: ${
+      data[i].datetim.split("T")[1]
+    }`;
 
     marker1 = L.marker([lat, lon], { icon: dot }).addTo(dotMarkerLayer);
-    marker1.bindPopup("Time: " + time);
+    marker1.bindPopup(time);
 
     if (i === 0) {
       // This is the start point
       startMarker = L.marker([lat, lon], { icon: greenflag }).addTo(map);
-      startMarker.bindPopup("Time: " + time);
+      startMarker.bindPopup(time);
     } else if (i === data.length - 1) {
       // This is the end point
       endMarker = L.marker([lat, lon], { icon: redflag }).addTo(map);
-      endMarker.bindPopup("Time: " + time);
+      endMarker.bindPopup(time);
     }
 
     var timeoutId = setTimeout(
@@ -1349,6 +1485,15 @@ btnGroupStop.addEventListener("click", () => {
 
 // Live Tracking
 btnLivePlay.addEventListener("click", async () => {
+  if (liveVehicleDropdown.value === "0") {
+    Swal.fire({
+      icon: "info",
+      title: "Attention",
+      text: "Please select Vehicle Number",
+    });
+    return;
+  }
+
   if (!isTracking) {
     trackInterval = setInterval(getLiveVehicleLocation, 5000);
     btnLivePlay.disabled = true;
@@ -1368,6 +1513,16 @@ btnLiveStop.addEventListener("click", () => {
 // History
 btnHistoryShow.addEventListener("click", async (e) => {
   e.preventDefault();
+
+  if (historyVehicleDropdown.value === "0") {
+    Swal.fire({
+      icon: "info",
+      title: "Attention",
+      text: "Please select Zone, Ward, Startdate, Enddate and Vehicle name",
+    });
+    return;
+  }
+
   clearMap();
   await getRouteId();
 });
@@ -1375,21 +1530,36 @@ btnHistoryShow.addEventListener("click", async (e) => {
 btnHistoryPlay.addEventListener("click", async (e) => {
   e.preventDefault();
 
+  if (
+    zoneDropdown.value === "0" ||
+    wardDropdown.value === "0" ||
+    !startDate.value ||
+    !endDate.value ||
+    historyVehicleDropdown.value === "0"
+  ) {
+    Swal.fire({
+      icon: "info",
+      title: "Attention",
+      text: "Please select Zone, Ward, Startdate, enddate and vehicle name",
+    });
+    return;
+  }
+
   if (isPlaying) {
     // Pause the animation
     isPlaying = false;
-    // btnPlay.innerHTML = `<i class="fa-regular fa-circle-play"></i>Play`;
-    // btnPlay.classList.remove("btn-danger");
-    // btnPlay.classList.add("btn-success");
+    btnHistoryPlay.innerHTML = `<i class="fa-regular fa-circle-play text-white"></i>Play`;
+    btnHistoryPlay.classList.remove("btn-danger");
+    btnHistoryPlay.classList.add("btn-success");
     timeoutIds.forEach(function (timeoutId) {
       clearTimeout(timeoutId); // Clear all timeouts to pause the animation
     });
   } else {
     // Resume or start the animation
     isPlaying = true;
-    // btnPlay.innerHTML = `<i class="fa-solid fa-stop"></i>Stop`;
-    // btnPlay.classList.add("btn-danger");
-    // btnPlay.classList.remove("btn-success");
+    btnHistoryPlay.innerHTML = `<i class="fa-solid fa-stop text-white"></i>Stop`;
+    btnHistoryPlay.classList.add("btn-danger");
+    btnHistoryPlay.classList.remove("btn-success");
     markerGroup.clearLayers();
     await getHistoryVehicleData();
   }
@@ -1429,11 +1599,13 @@ const clearAllMarkers = () => {
   markerGroup.clearLayers();
 };
 
-window.addEventListener("load", populateZoneDropdown);
-window.addEventListener("load", populateVendorDropdown);
-window.addEventListener("load", populateLiveVehicleDropdown);
-window.addEventListener("load", populateHistoryVehiDropdown);
-window.addEventListener("load", populateGeofenceDropdown);
+window.addEventListener("load", async () => {
+  await populateZoneDropdown();
+  await populateVendorDropdown();
+  await populateLiveVehicleDropdown();
+  await populateHistoryVehiDropdown();
+  await populateGeofenceDropdown();
+});
 
 // Bootstrap
 
