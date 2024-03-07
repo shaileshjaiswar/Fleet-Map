@@ -475,6 +475,7 @@ const handleWardSelect = async (event) => {
 // };
 
 const addGroupVehicles = (data) => {
+  clearFeeders();
   if (data.length > 0) {
     // Clear existing markers from the map
     if (featureGroup) {
@@ -500,6 +501,9 @@ const addGroupVehicles = (data) => {
     }
     if (featureGroupn) {
       map.removeLayer(featureGroupn);
+    }
+    if (markerGroup1) {
+      markerGroup1.clearLayers();
     }
 
     // Create a new feature group for the markers
@@ -587,7 +591,7 @@ const addGroupVehicles = (data) => {
       }
 
       const newLatLng = new L.LatLng(lat, lon);
-      let iconUrl = truck; // Default icon URL
+      // let iconUrl = truck; // Default icon URL
       if (status.startsWith("Running")) {
         console.log("Status starts with 'Running'");
         iconUrl = truckr; // Icon URL for "running" status
@@ -619,7 +623,12 @@ const addGroupVehicles = (data) => {
       });
       // Create a marker for each set of latitude and longitude
       const marker = L.marker([lat, lon], { icon: myIcon });
-      marker.bindPopup("Vehicle Name: " + veh);
+      marker.bindPopup(`
+      <b>Zone:</b> ${item.ZoneName} <br>
+      <b>Ward:</b> ${item.wardName} <br>
+      <b>Vendor Name:</b> ${item.VendorName} <br>
+      <b>Vehicle Name:</b> ${item.vehicleName} <br>
+      `);
       // const marker = L.marker([lat, lon]);
       featureGroup.addLayer(marker);
     });
@@ -673,7 +682,12 @@ const addGroupVehicles = (data) => {
         });
 
         const markerR = L.marker([lat, lon], { icon: RIcon });
-        markerR.bindPopup("Vehicle Name: " + veh);
+        markerR.bindPopup(`
+        <b>Zone:</b> ${item.ZoneName} <br>
+        <b>Ward:</b> ${item.wardName} <br>
+        <b>Vendor Name:</b> ${item.VendorName} <br>
+        <b>Vehicle Name:</b> ${item.vehicleName} <br>
+        `);
         featureGroup1.addLayer(markerR);
         // map.fitBounds(featureGroup1.getBounds());
       });
@@ -722,7 +736,12 @@ const addGroupVehicles = (data) => {
         });
 
         const markerN = L.marker([lat, lon], { icon: RIcon });
-        markerN.bindPopup("Vehicle Name: " + veh);
+        markerN.bindPopup(`
+        <b>Zone:</b> ${item.ZoneName} <br>
+        <b>Ward:</b> ${item.wardName} <br>
+        <b>Vendor Name:</b> ${item.VendorName} <br>
+        <b>Vehicle Name:</b> ${item.vehicleName} <br>
+        `);
         featureGroupn.addLayer(markerN);
         // map.fitBounds(featureGroupn.getBounds());
       });
@@ -771,7 +790,12 @@ const addGroupVehicles = (data) => {
         });
 
         const markerb = L.marker([lat, lon], { icon: bIcon });
-        markerb.bindPopup("Vehicle Name: " + veh);
+        markerb.bindPopup(`
+        <b>Zone:</b> ${item.ZoneName} <br>
+        <b>Ward:</b> ${item.wardName} <br>
+        <b>Vendor Name:</b> ${item.VendorName} <br>
+        <b>Vehicle Name:</b> ${item.vehicleName} <br>
+        `);
         featureGroupb.addLayer(markerb);
 
         map.fitBounds(featureGroupb.getBounds());
@@ -821,7 +845,12 @@ const addGroupVehicles = (data) => {
         });
 
         const markerw = L.marker([lat, lon], { icon: wIcon });
-        markerw.bindPopup("Vehicle Name: " + veh);
+        markerw.bindPopup(`
+        <b>Zone:</b> ${item.ZoneName} <br>
+        <b>Ward:</b> ${item.wardName} <br>
+        <b>Vendor Name:</b> ${item.VendorName} <br>
+        <b>Vehicle Name:</b> ${item.vehicleName} <br>
+        `);
         featureGroupw.addLayer(markerw);
 
         map.fitBounds(featureGroupw.getBounds());
@@ -870,7 +899,12 @@ const addGroupVehicles = (data) => {
         });
 
         const markerp = L.marker([lat, lon], { icon: PIcon });
-        markerp.bindPopup("Vehicle Name: " + veh);
+        markerp.bindPopup(`
+        <b>Zone:</b> ${item.ZoneName} <br>
+        <b>Ward:</b> ${item.wardName} <br>
+        <b>Vendor Name:</b> ${item.VendorName} <br>
+        <b>Vehicle Name:</b> ${item.vehicleName} <br>
+        `);
         featureGroupp.addLayer(markerp);
 
         map.fitBounds(featureGroupp.getBounds());
@@ -919,7 +953,12 @@ const addGroupVehicles = (data) => {
         });
 
         const markeri = L.marker([lat, lon], { icon: IIcon });
-        markeri.bindPopup("Vehicle Name: " + veh);
+        markeri.bindPopup(`
+        <b>Zone:</b> ${item.ZoneName} <br>
+        <b>Ward:</b> ${item.wardName} <br>
+        <b>Vendor Name:</b> ${item.VendorName} <br>
+        <b>Vehicle Name:</b> ${item.vehicleName} <br>
+        `);
         featureGroupi.addLayer(markeri);
 
         map.fitBounds(featureGroupi.getBounds());
@@ -969,7 +1008,12 @@ const addGroupVehicles = (data) => {
         });
 
         const markerin = L.marker([lat, lon], { icon: inIcon });
-        markerin.bindPopup("Vehicle Name: " + veh);
+        markerin.bindPopup(`
+        <b>Zone:</b> ${item.ZoneName} <br>
+        <b>Ward:</b> ${item.wardName} <br>
+        <b>Vendor Name:</b> ${item.VendorName} <br>
+        <b>Vehicle Name:</b> ${item.vehicleName} <br>
+        `);
         featureGroupin.addLayer(markerin);
 
         map.fitBounds(featureGroupin.getBounds());
@@ -1142,9 +1186,10 @@ const getFeeders = async (RouteId) => {
   }
 };
 
-const showFeeders = (data) => {
-  var markerfup;
+var myfIconLayer = L.layerGroup().addTo(map);
+var markerfup;
 
+const showFeeders = (data) => {
   for (var i = 0; i < data.length; i++) {
     var lat = data[i].sLat;
     var lon = data[i].sLong;
@@ -1180,6 +1225,13 @@ const showFeeders = (data) => {
         "<br>Expected Time: " +
         expectedTime
     );
+  }
+};
+
+const clearFeeders = () => {
+  if (markerfup) {
+    myfIconLayer.clearLayers(); // Clear all markers from the layer
+    markerfup = null; // Reset the marker variable
   }
 };
 
@@ -1570,6 +1622,7 @@ btnHistoryPlay.addEventListener("click", async (e) => {
 //Clear map
 
 btnClearMap.addEventListener("click", () => {
+  console.log("clicked");
   clearMap();
   if (filteredLayer) {
     map.removeLayer(filteredLayer);
